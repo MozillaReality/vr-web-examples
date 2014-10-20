@@ -1,0 +1,228 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="utf-8"><meta name="description" content="">
+		<meta name="viewport" content="width=device-width, initial-scale=1">
+		<link rel="stylesheet" href="css/style.css">
+		<title>HTML DOM VR Example</title>
+	</head>
+	<body>
+		<div id="container" class="container">
+			<div id="camera" style="transform: translate3d(0px, -150px, 0px) rotateZ(180deg) rotateY(180deg)" class="threed">
+
+        <div id="articles" class="threed">
+          <div id="dodo" class="article threed">
+            <div class="article-header">
+              <h1>Dodo</h1>
+            </div>
+
+            <img src="images/dodo.jpg">
+
+            <p>
+              The dodo (Raphus cucullatus) is an extinct flightless bird that was endemic to the island of Mauritius, east of Madagascar in the Indian Ocean.
+            </p>
+
+            <p>
+              Source: <a href="http://en.wikipedia.org/wiki/Dodo">Wikipedia</a>
+            </p>
+          </div>
+
+          <div id="condor" class="article threed">
+            <div class="article-header">
+              <h1>Condor</h1>
+            </div>
+
+            <img src="images/condor.jpg">
+
+            <p>
+              Condor is the name for two species of vultures, each in a monotypic genus. They are the largest flying land birds in the Western Hemisphere.
+            </p>
+
+            <p>
+              Source: <a href="http://en.wikipedia.org/wiki/Condor">Wikipedia</a>
+            </p>
+          </div>
+
+          <div id="kiwi" class="article threed">
+            <div class="article-header">
+              <h1>Kiwi</h1>
+            </div>
+
+            <img src="images/kiwi.jpg">
+
+            <p>
+              Kiwi (pronounced /kiːwiː/) or kiwis are flightless birds native to New Zealand, in the genus Apteryx and family Apterygidae.
+            </p>
+
+            <p>
+              Source: <a href="http://en.wikipedia.org/wiki/Kiwi">Wikipedia</a>
+            </p>
+          </div>
+
+          <div id="hummingbird" class="article threed">
+            <div class="article-header">
+              <h1>Hummingbird</h1>
+            </div>
+
+            <img src="images/hummingbird.jpg">
+
+            <p>
+              Hummingbirds are New World birds that constitute the family Trochilidae. They are among the smallest of birds, most species measuring in the 7.5–13 cm (3–5 in) range.
+            </p>
+
+            <p>
+              Source: <a href="http://en.wikipedia.org/wiki/Hummingbird">Wikipedia</a>
+            </p>
+          </div>
+
+          <div id="chicken" class="article threed">
+            <div class="article-header">
+              <h1>Chicken</h1>
+            </div>
+
+            <img src="images/hummingbird.jpg">
+
+            <p>
+              The chicken (Gallus gallus domesticus) is a domesticated fowl, a subspecies of the Red Junglefowl.
+            </p>
+
+            <p>
+              Source: <a href="http://en.wikipedia.org/wiki/Chicken">Wikipedia</a>
+            </p>
+          </div>
+
+          <div id="ostrich" class="article threed">
+            <div class="article-header">
+              <h1>Ostrich</h1>
+            </div>
+
+            <img src="images/ostrich.jpg">
+
+            <p>
+              The ostrich or common ostrich (Struthio camelus) is either one or two species of large flightless birds native to Africa, the only living member(s) of the genus Struthio, which is in the ratite family.
+            </p>
+
+            <p>
+              Source: <a href="http://en.wikipedia.org/wiki/Ostrich">Wikipedia</a>
+            </p>
+          </div>
+        </div>
+
+				<div class="grid-bottom threed"></div>
+
+				</div>
+			</div>
+	</div>
+</body>
+
+<!--
+vruits.js contains helper functions to convert positional data into CSS useable properties.
+-->
+<script type="text/javascript" src="js/vrutils.js"></script>
+
+<script>
+/*
+VR Headset and its associated orientation/position sensor
+*/
+var vrHMD, vrSensor;
+
+/*
+Element that will serve as our camera, moving the rest of the scene around
+*/
+var cssCamera = document.getElementById("camera");
+
+/*
+the camera's position, as a css transform string.  For right now, we want it just in the middle.
+*/
+var cssCameraPositionTransform = "translate3d(0, 0, 0)";
+
+/*
+Request animation frame loop.
+*/
+function animate() {
+	/*
+	Acquire positional data from VR headset and convert into a transformation that can be applied to CSS.
+	*/
+  if (vrSensor !== undefined) {
+    var state = vrSensor.getState();
+    var cssOrientationMatrix = cssMatrixFromOrientation(state.orientation, true);
+  }
+
+  /*
+  Apply positional data to camera element
+  */
+  cssCamera.style.transform = cssOrientationMatrix + " " + cssCameraPositionTransform;
+
+  window.requestAnimationFrame(animate);
+}
+
+function vrDeviceCallback(vrdevs) {
+	/*
+	Look for VR headset devices
+	*/
+  for (var i = 0; i < vrdevs.length; ++i) {
+    if (vrdevs[i] instanceof HMDVRDevice) {
+      vrHMD = vrdevs[i];
+      console.log(vrHMD);
+      break;
+    }
+  }
+
+  if (!vrHMD)
+    return;
+
+  /*
+  Then, find that HMD's position sensor
+  */
+  for (var i = 0; i < vrdevs.length; ++i) {
+    if (vrdevs[i] instanceof PositionSensorVRDevice &&
+        vrdevs[i].hardwareUnitId == vrHMD.hardwareUnitId)
+    {
+      vrSensor = vrdevs[i];
+      break;
+    }
+  }
+
+  if (!vrSensor) {
+    alert("Found a HMD, but didn't find its orientation sensor?");
+  }
+
+  // kick off rendering
+  requestAnimationFrame(animate);
+}
+
+
+function init() {
+	/*
+	Check for VR devces
+	*/
+  if (navigator.getVRDevices) {
+    navigator.getVRDevices().then(vrDeviceCallback);
+  }
+
+  /*
+  Listen for double click event to enter full-screen VR mode
+  */
+  document.body.addEventListener( 'dblclick', function() {
+    document.getElementById('container').mozRequestFullScreen({ vrDisplay: vrHMD });
+  });
+
+  /*
+  Listen for keyboard event and zero positional sensor on appropriate keypress.
+  */
+  function onkey(event) {
+    event.preventDefault();
+
+    if (event.keyCode == 90) { // z
+      vrSensor.zeroSensor();
+    }
+  };
+
+  window.addEventListener("keydown", onkey, true);
+
+
+}
+
+window.addEventListener("load", init, false);
+</script>
+</html>

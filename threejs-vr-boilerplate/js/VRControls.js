@@ -53,6 +53,14 @@ THREE.VRControls = function ( camera, done ) {
 		}
 	};
 
+	this.zeroSensor = function() {
+		var vrInput = this._vrInput;
+		if ( !vrInput ) {
+			return null;
+		}
+		vrInput.zeroSensor();
+	};
+
 	this.getVRState = function() {
 		var vrInput = this._vrInput;
 		var orientation;

@@ -1,0 +1,134 @@
+html, body {
+  margin: 0;
+  padding: 0;
+  width: 100%;
+  height: 100%;
+  background: #333;
+  overflow: hidden;
+  font-family: sans-serif;
+  font-size: 18px;
+}
+
+
+/* this is just to move the scene to the visible area when not in fullscreen VR */
+#container:not(:-moz-full-screen) {
+  transform: translate(50%, 50%);
+  height: 100%;
+  perspective: 1800px;
+}
+
+/*
+threed-class elements have transform-style: preserve-3d.  Any element with this property applied
+will be projected into stereo VR.   preserve-3d is not inherited.
+
+position: absolute; and 0,0 is also set because we'll position these elements fully using 3D
+transforms.  Their CSS position is irrelevant for us.  Without this, their CSS position will come
+into play as well as their transform.
+
+When in fullscreen VR, the 0,0,0 position is at the center of the viewport and not the top left.
+
+We don't modify the original transform-origin here (50% 50% 0), because that can be useful
+for moving elements around by their center point.  But it could also be set to 0,0,0 to make it
+completely clear exactly where/how 3D objects are moving.
+*/
+
+.threed {
+  transform-style: preserve-3d;
+  position: absolute;
+  top: 0;
+  left: 0;
+}
+
+/*
+The camera div just serves as a way to set up a modelview transform for the entire rest of the
+scene.  The transform that's set on it needs to be the *inverse* of where you want the camera
+to be; that is, if you want the camera to be at (0, 0, 500), then the transform needs to be
+set to (0, 0, -500).  The transform-origin is set here because we want to go from the origin
+*/
+
+#camera {
+  /* the transform itself is set programatically, since it needs to take into account the HMD orientation */
+  transform-origin: 0 0 0;
+}
+
+
+
+/*
+content
+*/
+
+
+#articles {
+  transform: translate3d(-300px,-250px,-800px);
+  border: 1px solid red;
+}
+
+.article {
+  width: 300px;
+  color: #000;
+  background: #fff;
+}
+
+.article p, .article h1 {
+  padding: 30px;
+  margin: 0;
+}
+
+.article-header h1 {
+  color: #fff;
+}
+
+.article img {
+  max-width: 100%;
+}
+
+#kiwi {
+ transform: translate3d(-600px, 0, 0) rotateY(25deg);
+}
+#kiwi .article-header {
+  background: #004358;
+}
+
+#dodo {
+ transform: translate3d(-300px, 0, 0) rotateY(25deg);
+}
+#dodo .article-header {
+  background: #1F8A70;
+}
+
+#condor {
+  transform: translate3d(0px, 0, 0) rotateY(25deg);
+}
+#condor .article-header {
+  background: #BEDB39;
+}
+
+#hummingbird {
+ transform: translate3d(300px, 0, 0) rotateY(-25deg);
+}
+#hummingbird .article-header {
+  background: #FFE11A;
+}
+
+#chicken {
+ transform: translate3d(600px, 0, 0) rotateY(-25deg);
+}
+#chicken .article-header {
+  background: #FD7400;
+}
+
+#ostrich {
+ transform: translate3d(900px, 0, 0) rotateY(-25deg);
+}
+#ostrich .article-header {
+  background: #5D098F;
+}
+
+
+.grid-bottom {
+  transform: translate(-50%, -50%);
+  transform: translate3d(-50%, 400px, 0) rotateX(90deg);
+  background-image: url('../images/grid.png');
+  width: 718px;
+  height: 718px;
+}

@@ -121,6 +121,20 @@
 		});
 
 		/*
+		Listen for keyboard event and zero positional sensor on appropriate keypress.
+		*/
+		function onkey(event) {
+	    event.preventDefault();
+
+	    if (event.keyCode == 90) { // z
+	    	controls.zeroSensor();
+	    }
+	  };
+
+	  window.addEventListener("keydown", onkey, true);
+
+
+		/*
 		Handle window resizes
 		*/
 		function onWindowResize() {
