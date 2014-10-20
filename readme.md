@@ -1,8 +1,8 @@
 ## VR Web examples
 
-* three.js VR boilerplate
-* DOM VR Skybox example
-* DOM VR Birds gallery example
+* [three.js VR boilerplate](http://mozvr.github.io/vr-web-examples/threejs-vr-boilerplate/)
+* [DOM VR Skybox](http://mozvr.github.io/vr-web-examples/domvr-skybox/)
+* [DOM VR Birds](http://mozvr.github.io/vr-web-examples/domvr-birds/)
 
 These example is best viewed using a VR enabled browser.   The standard versions of these browsers also work, but you will not get the stereo rendering.
 
