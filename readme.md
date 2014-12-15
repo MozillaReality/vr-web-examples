@@ -15,4 +15,4 @@ http://mozvr.com/downloads.html
 ### Controls
 
 * `Double click` or press `F` to enter full-screen virtual reality mode.
-* Press `Z` to zero sensor
+* Press `Z` to zero sensor (sets the forward direction of the scene).
