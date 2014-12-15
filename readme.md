@@ -7,10 +7,10 @@ A collection of boilerplate web VR scenes from the Mozilla Research VR team. For
 
 To view these examples in virtual reality mode requires a VR-enabled browser and a compatible headset. Currently the Oculus Rift DK1 and DK2 are supported, with support for additional devices coming soon. 
 
-Download experimental builds of Firefox with VR support from mozvr.com:
-```
-http://mozvr.com/downloads.html
-```
+Download experimental builds of Firefox with VR support for Mac and Windows:
+
+[http://mozvr.com/downloads.html](http://mozvr.com/downloads.html)
+
 
 ### Controls
 
