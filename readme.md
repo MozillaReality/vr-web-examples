@@ -11,6 +11,7 @@ Download experimental builds of Firefox with VR support for Mac and Windows:
 
 [http://mozvr.com/downloads.html](http://mozvr.com/downloads.html)
 
+If using web VR for the first time, make sure to properly configure your display settings, as described in the mozvr.com [Read Me](http://mozvr.com/readme.html). Failure to do so can cause the browser to not display VR mode properly or create high levels of judder.
 
 ### Controls
 
