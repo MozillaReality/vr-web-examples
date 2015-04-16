@@ -9,9 +9,9 @@ To view these examples in virtual reality mode requires a VR-enabled browser and
 
 Download experimental builds of Firefox with VR support for Mac and Windows:
 
-[http://mozvr.com/downloads.html](http://mozvr.com/downloads.html)
+[http://mozvr.com/downloads](http://mozvr.com/downloads)
 
-If using web VR for the first time, make sure to properly configure your display settings, as described in the mozvr.com [Read Me](http://mozvr.com/readme.html). Failure to do so can cause the browser to not display VR mode properly or create high levels of judder.
+If using web VR for the first time, make sure to properly configure your display settings, as described on the mozvr.com downloads page [Read Me](http://mozvr.com/downloads). Not doing so can cause the browser to not display VR mode properly or create high levels of judder.
 
 ### Controls
 
