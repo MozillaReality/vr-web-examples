@@ -54,10 +54,10 @@
 		/*
 		Create a three.js camera
 		*/
-		var camera = new THREE.PerspectiveCamera( 75, window.innerWidth / window.innerHeight, 1, 10000 );
+		var camera = new THREE.PerspectiveCamera( 75, window.innerWidth / window.innerHeight, 0, 100 );
 
 		/*
-		Apply VR headset positional data to camera.
+		Apply VR headset orientation and positional to camera.
 		*/
 		var controls = new THREE.VRControls( camera );
 
@@ -70,7 +70,7 @@
 		/*
 		Create 3d objects
 		*/
-		var geometry = new THREE.BoxGeometry( 10, 10, 10 );
+		var geometry = new THREE.BoxGeometry( 0.1, 0.1, 0.1 );
 
 		var material = new THREE.MeshNormalMaterial();
 
@@ -79,7 +79,7 @@
 		/*
 		Position cube mesh
 		*/
-		cube.position.z = -20;
+		cube.position.z = -0.3;
 
 		/*
 		Add cube mesh to your three.js scene
